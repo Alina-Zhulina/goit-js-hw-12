@@ -14,13 +14,13 @@ export async function getGallery(query) {
         per_page: 40
     });
 
-    const url = `${BASE_URL}${END_POINT}?${params}`;
+    const url = `${BASE_URL}${END_POINT}`;
     try {
-        const response = await fetch(url);
-        if (!response.ok) {
+        const response = await axios.get(url, { params });
+        if (response.status !== 200) {
             throw new Error('Failed to fetch images');
         }
-        const data = await response.json();
+        const data = response.data;
         if (data.hits.length === 0) {
             throw new Error("Sorry, there are no images matching your search query. Please try again!");
         }
