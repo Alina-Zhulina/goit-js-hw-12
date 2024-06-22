@@ -3,8 +3,7 @@ import axios from 'axios';
 export async function getGallery(query, page = 1) {
     const API_KEY = '44394014-4230f595acf8cb42e98735a97';
     const BASE_URL = 'https://pixabay.com';
-    const END_POINT = '/api/';
-    let page = 1; 
+    const END_POINT = '/api/'; 
 const perPage = 15;
 
     const params = new URLSearchParams({
