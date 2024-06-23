@@ -156,11 +156,14 @@ button[type="submit"]:hover {
 .photo-card {
   width: calc((100% - 48px) / 3);
   max-width: 360px;
- 
+
   margin: 10px;
 }
 .info {
   padding: 10px;
   background-color: #ebf0f1;
   border-radius: 0 0 8px 8px; 
+}
+.load-more-btn {
+
 }
