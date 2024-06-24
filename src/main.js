@@ -1,12 +1,13 @@
+
 import { getGallery } from './js/pixabay-api.js';
-import { clearGallery, renderImages, showNotification, showLoadBtn, hideLoadBtn, updateBtnStatus} from './js/render-functions.js'
+import { clearGallery, renderImages, showNotification, showLoadBtn, hideLoadBtn, updateBtnStatus } from './js/render-functions.js';
 
 const form = document.querySelector('.search-form');
 const loader = document.querySelector('.loader');
 const input = form.querySelector('input[name="query"]');
 const loadMoreButton = document.querySelector('.load-more-btn');
 const divList = document.querySelector('.gallery'); 
-let query = "";
+let query = '';
 let page = 1;
 let maxPage = 1;
 const perPage = 15;
@@ -34,7 +35,6 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
-
 loadMoreButton.addEventListener('click', async () => {
     try {
         page++; 
@@ -44,8 +44,6 @@ loadMoreButton.addEventListener('click', async () => {
         showNotification(error.message);
     }
 });
-
-
 
 async function fetchAndRenderImages() {
     const data = await getGallery(query, page);
@@ -57,16 +55,17 @@ async function fetchAndRenderImages() {
         showNotification("Sorry, there are no images matching your search query. Please try again!");
     } else {
         renderImages(images);
-        
-        updateBtnStatus(page, maxPage, loadMoreButton, showNotification);
+        updateBtnStatus(page, maxPage);
     }
 }
 
 function scrollElements() {
-    const firstCard = divList.querySelector('.photo-card');
-    const cardHeight = firstCard.getBoundingClientRect().height;
-    window.scrollBy({
-        top: cardHeight * 2,
-        behavior: 'smooth',
-    });
+    const firstCard = divList.querySelector('li.photo-card');
+    if (firstCard) {
+        const cardHeight = firstCard.getBoundingClientRect().height;
+        window.scrollBy({
+            top: cardHeight * 2,
+            behavior: 'smooth',
+        });
+    }
 }
